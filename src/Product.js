@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import Search from './Search';
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [gtinResult, setGtinResult] = useState([]);
+  const [loading, isLoading] = useState(false);
 
+  /*
   useEffect(() => {
     const url = 'http://localhost:8080/product/all';
 
@@ -35,10 +38,40 @@ function Product() {
     fetchData();
     findByGtin();
 }, []);
+*/
+
+/*
+  const handleSubmit = ((event) => {
+    event.preventDefault();
+    console.log(gtin)
+    fetch('http://localhost:8080/product/search/' + gtin)
+      .then(response => response.json)
+      .then(json => setGtinResult(json));
+  });
+  */
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const g = {gtin: data.get('gtin')};
+    const hr = await fetch(`http://localhost:8080/product/search/${g.gtin}`);
+    const json = await hr.json();
+    setGtinResult(json);
+    isLoading(true)
+  }
 
   return (
     <div>
-      {products[0].id}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Gtin:
+          <input type="text"
+                id="gtin"
+                name="gtin"/>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+      {!loading ? null : <Search result={gtinResult[0]}></Search>}
     </div>
   );
 }
