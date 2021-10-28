@@ -4,6 +4,10 @@ function AdvancedSearch() {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, isLoading] = useState(false);
   const [searchValues, setSearchValues] = useState({});
+  const [showResult, setShowResult] = useState(false);
+  const [finalResult, setFinalResult] = useState([]);
+  let searchResult = [];
+  let table = "";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,19 +26,26 @@ function AdvancedSearch() {
   }
 
   if (loading) {
-    console.log(searchValues.name)
-    console.log(allProducts[0].name)
-    console.log(searchValues.minWeight.length)
-    if (searchValues.minWeight < 3) {
-      console.log('pienempi kun 3')
-    }
     allProducts.forEach( e => {
-      if (searchValues.name.length > 0) {
-        if (e.name.toLowerCase().includes(searchValues.name.toLowerCase())) {
-          console.log('yep');
-        }
+      if (e.name.toLowerCase().includes(searchValues.name.toLowerCase()) &&
+          (e.weight >= searchValues.minWeight && e.weight <= searchValues.maxWeight) &&
+          (e.energy >= searchValues.minEnergy && e.energy <= searchValues.maxEnergy)) {
+        searchResult.push({gtin: e.gtin})
       }
     })
+    setFinalResult(searchResult);
+    isLoading(false);
+    setShowResult(true);
+  }
+
+  if (showResult) {
+    if (finalResult.length > 0) {
+      console.log('yes')
+      table = <div>{finalResult.map(result => <div key={result.gtin}>{result.gtin}</div>)}</div>
+    } else {
+      console.log('no')
+      table = <p>No data found.</p>
+    }
   }
 
   return (
@@ -44,38 +55,44 @@ function AdvancedSearch() {
         Name:&nbsp;
         <input type="text"
               id="name"
-              name="name"/>
+              name="name"
+              required/>
       </label><br/>
       <label>
         Min weight:&nbsp;
         <input type="number"
               min="0"
               id="minWeight"
-              name="minWeight"/>
+              name="minWeight"
+              placeholder="0"/>
       </label>&nbsp;
       <label>
         Max weight:&nbsp;
         <input type="number"
               min="0"
               id="maxWeight"
-              name="maxWeight"/>
+              name="maxWeight"
+              placeholder="0"/>
       </label><br/>
       <label>
         Min energy:&nbsp;
         <input type="number"
               min="0"
               id="minEnergy"
-              name="minEnergy"/>
+              name="minEnergy"
+              placeholder="0"/>
       </label>&nbsp;
       <label>
         Max energy:&nbsp;
         <input type="number"
               min="0"
               id="maxEnergy"
-              name="maxEnergy"/>
+              name="maxEnergy"
+              placeholder="0"/>
       </label><br/>
       <input type="submit" value="Submit" />
     </form>
+    {table}
   </div>
   )
 }
