@@ -3,10 +3,16 @@ import AdvancedSearch from './AdvancedSearch';
 import Navbar from './Navbar';
 import Product from './Product';
 
-function Search() {
+function Search(props) {
   const [gtinResult, setGtinResult] = useState([]);
   const [loading, isLoading] = useState(false);
+  let gtinNumber = "";
+  let gtinReceived = false;
 
+  if (props.location.state !== undefined) {
+    gtinNumber = props.location.state.gtin;
+    gtinReceived = true;
+  }
   /*
   useEffect(() => {
     const url = 'http://localhost:8080/product/all';
@@ -40,9 +46,16 @@ function Search() {
       <form onSubmit={handleSubmit}>
         <label>
           Gtin:
+          {!gtinReceived ?
           <input type="text"
                 id="gtin"
                 name="gtin"/>
+          :
+          <input type="text"
+                id="gtin"
+                name="gtin"
+                defaultValue={gtinNumber}/>
+          }
         </label>
         <input type="submit" value="Submit" />
       </form>
