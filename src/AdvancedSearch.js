@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 import Navbar from './Navbar';
+import Product from './Product';
 
 function AdvancedSearch() {
   const [allProducts, setAllProducts] = useState([]);
@@ -7,8 +9,10 @@ function AdvancedSearch() {
   const [searchValues, setSearchValues] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [finalResult, setFinalResult] = useState([]);
+  const [showProduct, setShowProduct] = useState(false);
   let searchResult = [];
   let table = "";
+  const [gtinNumber, setGtinNumber] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +28,11 @@ function AdvancedSearch() {
     setAllProducts(json);
     hasLoaded(true);
     console.log(values);
+  }
+
+  const handeClick = (event) => {
+    setGtinNumber(event.target.outerText);
+    setShowProduct(true);
   }
 
   if (loaded) {
@@ -48,12 +57,30 @@ function AdvancedSearch() {
           <th>Gtin</th>
           <th>Name</th>
         </tr>
-        {finalResult.map(result => <tr key={result.gtin}><td>{result.gtin}</td><td>{result.name}</td></tr>)}
+        {finalResult.map(result => 
+        <tr key={result.gtin}>
+          <td onClick={handeClick}>
+            {result.gtin}
+          </td>
+          <td>
+            {result.name}
+          </td>
+          </tr>)}
         </tbody>
       </table>
     } else {
       table = <p>No data found.</p>
     }
+  }
+
+  if (showProduct) {
+    console.log('hello')
+    return (
+    <Redirect push to={{
+      pathname:"/",
+      state: {gtin: gtinNumber}
+    }}/>
+    )
   }
 
   return (

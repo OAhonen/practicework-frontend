@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 function Product(props) {
   let pr = props.result;
   if (pr === undefined) {
-    return <div>hello</div>
+    return <div></div>
   } else {
     return (
       <div>
