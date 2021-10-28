@@ -100,7 +100,7 @@ function AdvancedSearch() {
               min="0"
               id="minWeight"
               name="minWeight"
-              placeholder="0"/>
+              defaultValue="0"/>
       </label>&nbsp;
       <label>
         Max weight:&nbsp;
@@ -108,7 +108,7 @@ function AdvancedSearch() {
               min="0"
               id="maxWeight"
               name="maxWeight"
-              placeholder="0"/>
+              defaultValue="0"/>
       </label><br/>
       <label>
         Min energy:&nbsp;
@@ -116,7 +116,7 @@ function AdvancedSearch() {
               min="0"
               id="minEnergy"
               name="minEnergy"
-              placeholder="0"/>
+              defaultValue="0"/>
       </label>&nbsp;
       <label>
         Max energy:&nbsp;
@@ -124,7 +124,7 @@ function AdvancedSearch() {
               min="0"
               id="maxEnergy"
               name="maxEnergy"
-              placeholder="0"/>
+              defaultValue="0"/>
       </label><br/>
       <input type="submit" value="Submit" />
     </form>
