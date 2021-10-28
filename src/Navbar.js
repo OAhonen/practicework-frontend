@@ -5,6 +5,7 @@ function Navbar() {
     <div>
       <Link to="/">Search </Link>
       <Link to="/advanced">Advanced search </Link>
+      <Link to="/allproducts">All products</Link>
     </div>
   );
 };
