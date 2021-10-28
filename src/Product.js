@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AdvancedSearch from './AdvancedSearch';
+import Navbar from './Navbar';
 import Search from './Search';
 
 function Product() {
@@ -35,6 +36,7 @@ function Product() {
 
   return (
     <div>
+      <Navbar></Navbar>
       <form onSubmit={handleSubmit}>
         <label>
           Gtin:
@@ -45,7 +47,6 @@ function Product() {
         <input type="submit" value="Submit" />
       </form>
       {!loading ? null : <Search result={gtinResult[0]}></Search>}
-      <AdvancedSearch></AdvancedSearch>
     </div>
   );
 }

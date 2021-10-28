@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 
 function AdvancedSearch() {
   const [allProducts, setAllProducts] = useState([]);
@@ -40,7 +41,6 @@ function AdvancedSearch() {
 
   if (showResult) {
     if (finalResult.length > 0) {
-      console.log('yes')
       table = 
       <table>
         <tbody>
@@ -52,13 +52,13 @@ function AdvancedSearch() {
         </tbody>
       </table>
     } else {
-      console.log('no')
       table = <p>No data found.</p>
     }
   }
 
   return (
     <div>
+      <Navbar></Navbar>
     <form onSubmit={handleSubmit}>
       <label>
         Name:&nbsp;
