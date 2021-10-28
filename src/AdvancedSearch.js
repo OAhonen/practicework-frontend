@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function AdvancedSearch() {
   const [allProducts, setAllProducts] = useState([]);
-  const [loading, isLoading] = useState(false);
+  const [loaded, hasLoaded] = useState(false);
   const [searchValues, setSearchValues] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [finalResult, setFinalResult] = useState([]);
@@ -21,27 +21,36 @@ function AdvancedSearch() {
     const hr = await fetch(`http://localhost:8080/product/all`);
     const json = await hr.json();
     setAllProducts(json);
-    isLoading(true);
+    hasLoaded(true);
     console.log(values);
   }
 
-  if (loading) {
+  if (loaded) {
     allProducts.forEach( e => {
       if (e.name.toLowerCase().includes(searchValues.name.toLowerCase()) &&
           (e.weight >= searchValues.minWeight && e.weight <= searchValues.maxWeight) &&
           (e.energy >= searchValues.minEnergy && e.energy <= searchValues.maxEnergy)) {
-        searchResult.push({gtin: e.gtin})
+        searchResult.push({gtin: e.gtin, name: e.name, weight: e.weight, energy: e.energy})
       }
     })
     setFinalResult(searchResult);
-    isLoading(false);
+    hasLoaded(false);
     setShowResult(true);
   }
 
   if (showResult) {
     if (finalResult.length > 0) {
       console.log('yes')
-      table = <div>{finalResult.map(result => <div key={result.gtin}>{result.gtin}</div>)}</div>
+      table = 
+      <table>
+        <tbody>
+        <tr>
+          <th>Gtin</th>
+          <th>Name</th>
+        </tr>
+        {finalResult.map(result => <tr key={result.gtin}><td>{result.gtin}</td><td>{result.name}</td></tr>)}
+        </tbody>
+      </table>
     } else {
       console.log('no')
       table = <p>No data found.</p>
