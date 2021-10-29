@@ -12,7 +12,7 @@ function Product(props) {
 
   const deleteProduct = async (event) => {
     console.log(pr.id)
-    await fetch(`/product/delete/${pr.id}`, {
+    await fetch(`https://practicework-backend.herokuapp.com/product/delete/${pr.id}`, {
       method: 'DELETE',
     })
     window.location.reload();

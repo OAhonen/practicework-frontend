@@ -30,7 +30,7 @@ function AdvancedSearch() {
                     minEnergy: data.get('minEnergy'),
                     maxEnergy: data.get('maxEnergy')};
     setSearchValues(values);
-    const hr = await fetch(`/product/all`);
+    const hr = await fetch(`https://practicework-backend.herokuapp.com/product/all`);
     const json = await hr.json();
     setAllProducts(json);
     hasLoaded(true);

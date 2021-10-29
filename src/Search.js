@@ -41,7 +41,7 @@ function Search(props) {
     event.preventDefault();
     const data = new FormData(event.target);
     const g = {gtin: data.get('gtin')};
-    const hr = await fetch(`/product/search/${g.gtin}`);
+    const hr = await fetch(`https://practicework-backend.herokuapp.com/product/search/${g.gtin}`);
     const json = await hr.json();
     setGtinResult(json);
     isLoading(true)

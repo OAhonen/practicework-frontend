@@ -6,7 +6,7 @@ function AllProducts() {
   const [products, setProducts] = useState([]);
   const cookies = new Cookies();
   //const url = 'http://localhost:8080/product/all';
-  const url = '/product/all';
+  const url = 'https://practicework-backend.herokuapp.com/product/all';
 
   useEffect(() => {
     async function fetchData() {

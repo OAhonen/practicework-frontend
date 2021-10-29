@@ -12,7 +12,7 @@ function Login() {
     event.preventDefault();
     const data = new FormData(event.target);
     const values = {name: data.get('name'), password: data.get('password')};
-    const hr = await fetch(`/user/${values.name}&${values.password}`);
+    const hr = await fetch(`https://practicework-backend.herokuapp.com/user/${values.name}&${values.password}`);
     const json = await hr.json();
     setReceivedData(json);
   }
