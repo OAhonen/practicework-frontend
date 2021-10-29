@@ -6,6 +6,9 @@ function Logout() {
   const cookies = new Cookies();
   const [loggedOut, setLoggedOut] = React.useState(true);
 
+  /**
+   * If user logs out, modify cookies and redirect to frontpage.
+   */
   if (loggedOut) {
     cookies.set('authCookie', 'false', { path: '/' });
     return (

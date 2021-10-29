@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import Navbar from './Navbar';
-import Product from './Product';
 import Cookies from 'universal-cookie';
 
 function AdvancedSearch() {
@@ -19,8 +18,11 @@ function AdvancedSearch() {
   if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
     return <div>You are not logged in.</div>
   }
-  console.log(cookies.get('authCookie'));
 
+  /**
+   * Get data from the form and fetch all products.
+   * @param {*} event 
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -34,14 +36,20 @@ function AdvancedSearch() {
     const json = await hr.json();
     setAllProducts(json);
     hasLoaded(true);
-    console.log(values);
   }
 
+  /**
+   * Called, when GTIN-number is clicked in the table.
+   * @param {*} event 
+   */
   const handeClick = (event) => {
     setGtinNumber(event.target.outerText);
     setShowProduct(true);
   }
 
+  /**
+   * After finishing the fetch, handle the data.
+   */
   if (loaded) {
     allProducts.forEach( e => {
       if (e.name.toLowerCase().includes(searchValues.name.toLowerCase()) &&
@@ -55,6 +63,9 @@ function AdvancedSearch() {
     setShowResult(true);
   }
 
+  /**
+   * Put the data found into table.
+   */
   if (showResult) {
     if (finalResult.length > 0) {
       table = 
@@ -80,8 +91,10 @@ function AdvancedSearch() {
     }
   }
 
+  /**
+   * If GTIN-number is clicked, redirect to Search with gtin-number.
+   */
   if (showProduct) {
-    console.log('hello')
     return (
     <Redirect push to={{
       pathname:"/search",

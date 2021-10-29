@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AdvancedSearch from './AdvancedSearch';
 import Navbar from './Navbar';
 import Product from './Product';
 import Cookies from 'universal-cookie';
@@ -11,6 +10,9 @@ function Search(props) {
   let gtinNumber = "";
   let gtinReceived = false;
 
+  /**
+   * If user is coming from AdvancedSearch, get the GTIN-number from props.
+   */
   if (props.location.state !== undefined) {
     gtinNumber = props.location.state.gtin;
     gtinReceived = true;
@@ -19,29 +21,16 @@ function Search(props) {
   if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
     return <div>You are not logged in.</div>
   }
-  console.log(cookies.get('authCookie'));
-  /*
-  useEffect(() => {
-    const url = 'http://localhost:8080/product/all';
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        setProducts(json);
-        console.log(json[0].id)
-      } catch (error) {
-        console.log("error", error);
-      }
-    }
-  });
-  */
-
+  /**
+   * Fetch the product with GTIN-number.
+   * @param {*} event 
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    const g = {gtin: data.get('gtin')};
-    const hr = await fetch(`https://practicework-backend.herokuapp.com/product/search/${g.gtin}`);
+    const gt = {gtin: data.get('gtin')};
+    const hr = await fetch(`https://practicework-backend.herokuapp.com/product/search/${gt.gtin}`);
     const json = await hr.json();
     setGtinResult(json);
     isLoading(true)

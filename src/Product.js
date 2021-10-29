@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Cookies from 'universal-cookie';
 
 function Product(props) {
@@ -8,7 +8,6 @@ function Product(props) {
   if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
     return <div>You are not logged in.</div>
   }
-  console.log(cookies.get('authCookie'));
 
   const deleteProduct = async (event) => {
     console.log(pr.id)

@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import React, { useState } from 'react';
 import { Redirect } from "react-router";
 import Cookies from 'universal-cookie';
@@ -6,8 +5,11 @@ import Cookies from 'universal-cookie';
 function Login() {
   const cookies = new Cookies();
   const [receivedData, setReceivedData] = useState([]);
-  console.log(cookies.get('authCookie'));
 
+  /**
+   * Check in backend if user's name and password matches.
+   * @param {*} event 
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -17,6 +19,9 @@ function Login() {
     setReceivedData(json);
   }
 
+  /**
+   * If correct name and password was given, redirect to Search.
+   */
   if (receivedData.length > 0) {
     cookies.set('authCookie', 'true', { path: '/' });
     return (
