@@ -1,9 +1,12 @@
 import Navbar from "./Navbar";
 import React, { useState, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 
 function AllProducts() {
   const [products, setProducts] = useState([]);
-  const url = 'http://localhost:8080/product/all';
+  const cookies = new Cookies();
+  //const url = 'http://localhost:8080/product/all';
+  const url = '/product/all';
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +18,11 @@ function AllProducts() {
 
     fetchData()
   }, [])
+
+  if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
+    return <div>You are not logged in.</div>
+  }
+  console.log(cookies.get('authCookie'));
 
   return (
     <div>

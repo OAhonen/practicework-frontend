@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import Navbar from './Navbar';
 import Product from './Product';
+import Cookies from 'universal-cookie';
 
 function AdvancedSearch() {
+  const cookies = new Cookies();
   const [allProducts, setAllProducts] = useState([]);
   const [loaded, hasLoaded] = useState(false);
   const [searchValues, setSearchValues] = useState({});
@@ -14,6 +16,11 @@ function AdvancedSearch() {
   let table = "";
   const [gtinNumber, setGtinNumber] = useState("");
 
+  if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
+    return <div>You are not logged in.</div>
+  }
+  console.log(cookies.get('authCookie'));
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -23,7 +30,7 @@ function AdvancedSearch() {
                     minEnergy: data.get('minEnergy'),
                     maxEnergy: data.get('maxEnergy')};
     setSearchValues(values);
-    const hr = await fetch(`http://localhost:8080/product/all`);
+    const hr = await fetch(`/product/all`);
     const json = await hr.json();
     setAllProducts(json);
     hasLoaded(true);
@@ -77,7 +84,7 @@ function AdvancedSearch() {
     console.log('hello')
     return (
     <Redirect push to={{
-      pathname:"/",
+      pathname:"/search",
       state: {gtin: gtinNumber}
     }}/>
     )

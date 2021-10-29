@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 
 function Product(props) {
   let pr = props.result;
+  const cookies = new Cookies();
+
+  if (cookies.get('authCookie') === undefined || cookies.get('authCookie') === 'false') {
+    return <div>You are not logged in.</div>
+  }
+  console.log(cookies.get('authCookie'));
 
   const deleteProduct = async (event) => {
     console.log(pr.id)
-    await fetch(`http://localhost:8080/product/delete/${pr.id}`, {
+    await fetch(`/product/delete/${pr.id}`, {
       method: 'DELETE',
     })
     window.location.reload();
