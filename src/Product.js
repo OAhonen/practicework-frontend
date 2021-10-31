@@ -9,6 +9,7 @@ function Product(props) {
     return <div>You are not logged in.</div>
   }
 
+  /*
   const deleteProduct = async (event) => {
     console.log(pr.id)
     await fetch(`https://practicework-backend.herokuapp.com/product/delete/${pr.id}`, {
@@ -16,6 +17,7 @@ function Product(props) {
     })
     window.location.reload();
   }
+  */
 
   if (pr === undefined) {
     return <div></div>
@@ -27,7 +29,9 @@ function Product(props) {
       Name: {pr.name}<br/>
       Weight: {pr.weight}<br/>
       Energy: {pr.energy}<br/>
+      {/*
       <p onClick={deleteProduct}>DELETE PRODUCT</p>
+      */}
       </div>
     )
   }
