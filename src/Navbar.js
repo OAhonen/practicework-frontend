@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import './css/nav.css';
 
 function Navbar() {
   return (
-    <div>
-      <Link to="/search">Search </Link>
-      <Link to="/advanced">Advanced search </Link>
-      <Link to="/allproducts">All products</Link>
-      <Link to="/logout">Logout</Link>
+    <div className="wholenavi">
+      <Link className="navi" to="/search">Search </Link>
+      <Link className="navi" to="/advanced">Advanced search </Link>
+      <Link className="navi" to="/allproducts">All products</Link>
+      <Link className="navi" to="/logout">Logout</Link>
     </div>
   );
 };

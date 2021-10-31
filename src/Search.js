@@ -41,7 +41,7 @@ function Search(props) {
       <Navbar></Navbar>
       <form onSubmit={handleSubmit}>
         <label>
-          Gtin:
+          Gtin:&nbsp;
           {!gtinReceived ?
           <input type="text"
                 id="gtin"
@@ -51,10 +51,11 @@ function Search(props) {
                 id="gtin"
                 name="gtin"
                 defaultValue={gtinNumber}/>
-          }
+          }<br/>
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit"/>
       </form>
+      <br/>
       {!loading ? null : <Product result={gtinResult[0]}></Product>}
     </div>
   );

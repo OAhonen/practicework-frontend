@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import Navbar from './Navbar';
 import Cookies from 'universal-cookie';
+import './css/resulttable.css';
 
 function AdvancedSearch() {
   const cookies = new Cookies();
@@ -77,7 +78,7 @@ function AdvancedSearch() {
         </tr>
         {finalResult.map(result => 
         <tr key={result.gtin}>
-          <td onClick={handeClick}>
+          <td className="gtin" onClick={handeClick}>
             {result.gtin}
           </td>
           <td>

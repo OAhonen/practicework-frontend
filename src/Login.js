@@ -35,14 +35,14 @@ function Login() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Name:
+          Name:&nbsp;
           <input type="text"
                 id="name"
-                name="name"/>
-          Password:
+                name="name"/><br/>
+          Password:&nbsp;
           <input type="text"
                 id="password"
-                name="password"/>
+                name="password"/><br/>
         </label>
         <input type="submit" value="Submit" />
       </form>

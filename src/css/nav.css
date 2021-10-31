@@ -1,0 +1,12 @@
+.navi:hover {
+  color: red;
+}
+
+.navi {
+  padding: 10px;
+}
+
+.wholenavi {
+  display: flex;
+  padding: 10px;
+}

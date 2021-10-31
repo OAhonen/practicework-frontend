@@ -1,0 +1,8 @@
+.gtin:hover {
+  color: lightblue;
+  cursor: pointer;
+}
+
+.gtin {
+  color: blue;
+}
